@@ -2,7 +2,7 @@ from fastapi import FastAPI, HTTPException
 
 app = FastAPI()
 
-items = []
+items = ['banana', 'apple', 'orange', 'strawberry', 'cherry', 'pineapple', 'grapes', 'satsuma', 'star-fruit', 'mango', 'raspberry']
 
 # new path syntax
 @app.get('/')
@@ -28,5 +28,6 @@ def get_item(item_id: int) -> str:
 @app.get('/items')
 # limit returned results
 # adding type suggestion int allows fastapi to convert from url request string
-def get_items(limit: int = 1) -> list[str]:
+# default limit is 10 - query parameter is alterable to any limit
+def get_items(limit: int = 10) -> list[str]:
     return items[0: limit]

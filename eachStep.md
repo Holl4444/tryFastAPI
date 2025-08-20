@@ -49,8 +49,9 @@ curl -X POST -H "Content-Type: application/json" 'http://127.0.0.1:8000/items?it
 and running the get in a separate terminal or via Postman:
 curl http://127.0.0.1:8000/items
 
-Optionally add limit to the number of returned items with def get_items(limit: int = 1) -> list[str]:
+Optionally add limit to the number of returned items with def get_items(limit: int = 10) -> list[str]:
     return items[0: limit]
+Hardcoded some list items to test default. To test limit parameter add it to url: curl http://127.0.0.1:8000/items?limit=3
 
 **ERROR HANDLING**
 import HTTPException from fastapi
