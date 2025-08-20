@@ -34,6 +34,10 @@ Either use Postman or open a new terminal in order to test the route receiving a
 curl -X POST -H "Content-Type: application/json" 'http://127.0.0.1:8000/items?item=apple'
 curl http://127.0.0.1:8000/items/0
 
+curl = command-line tool for making HTTP requests
+-X POST = that this is a POST request (-X GET is get etc)
+-H "Content-Type: application/json" = before adding a header (says 'sending JSON')
+
 **ADD GET ITEM BY ID**
 Add get specific item route (/items/{item_id}) syntax. Here it doesn't need an id establishing but USES LIST INDEX. Add function to return the item and test with:
 curl http://127.0.0.1:8000/items/0
@@ -59,3 +63,16 @@ add error handling in your code (ie/ out of bounds index error 404) using the sy
 raise HTTPException(status_code=404, detail="Item not found") - detail optional
 test an out of bounds index in the same way as previously in a separate terminal:
 curl http://127.0.0.1:8000/items/5
+
+**Data Structures: Pydantic Models**
+import BaseModel: from pydantic import BaseModel - pydantic is already installed by default with fastapi
+Extend BaseModel to become an Item class: 
+    class Item(BaseModel):
+        text: str = None
+        is_done: bool = False
+
+Update app to use the model.
+Update curl request to handle new JSON type (was str):
+    curl -X POST -H "Content-Type: application/json" -d '{"text":"apple"}' 'http://127.0.0.1:8000/items'
+
+-d '{"text":"apple"}' = data to send in request body
