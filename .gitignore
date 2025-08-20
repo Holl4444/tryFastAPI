@@ -1,0 +1,14 @@
+.venv/
+# python bytecode cache
+pycache/
+# tool caches
+.mypy_cache/
+.pytest_cache/
+# compiled python files
+*.pyc, *pyo, *pyd
+#log files
+.log
+.vscode
+dist/
+build/
+*.egg-info
