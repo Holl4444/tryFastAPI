@@ -1,3 +1,5 @@
+pixegami tutorial vid: https://www.youtube.com/watch?v=iWS9ogMPOI0
+
 **PYTHON VERV AND GENERAL SET UP**
 Activate the virtual environment before installing packages.
 python -m venv .venv
@@ -71,8 +73,32 @@ Extend BaseModel to become an Item class:
         text: str = None
         is_done: bool = False
 
+To make a field required, just delete the default. ie text: str = None -> text: str.
+Test by removing text or changing field name.
+
 Update app to use the model.
 Update curl request to handle new JSON type (was str):
     curl -X POST -H "Content-Type: application/json" -d '{"text":"apple"}' 'http://127.0.0.1:8000/items'
 
 -d '{"text":"apple"}' = data to send in request body
+
+***Add return type***
+Add "response_model=<model-type>" to the route, here using the class we made earlier:
+@app.get("/items/{item_id}", response_model=Item)
+Update /items route also with response_model = list[Item]
+
+**FastAPI Docs**
+Add /docs#/ to the url:
+    127.0.0.1:8000/docs#/
+Takes you to automated documentation where you can see all routes and schemas generated! Inspect them by clicking AND test paths without typing in CLI / using Postman. Clicking the small /openapi.json gives you a JSON file with all the info on your api
+
+using /redoc instead gives a different layout?:
+    127.0.0.1:8000/redoc
+
+
+FASTAPI vs FLASK(open source community support)
+-Async by default: handles more concurrent requests without config
+-Easier to use
+xLess adoption and support
+
+Usecase: lightweight backend
