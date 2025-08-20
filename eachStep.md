@@ -49,6 +49,9 @@ curl -X POST -H "Content-Type: application/json" 'http://127.0.0.1:8000/items?it
 and running the get in a separate terminal or via Postman:
 curl http://127.0.0.1:8000/items
 
+Optionally add limit to the number of returned items with def get_items(limit: int = 1) -> list[str]:
+    return items[0: limit]
+
 **ERROR HANDLING**
 import HTTPException from fastapi
 add error handling in your code (ie/ out of bounds index error 404) using the syntax:
